@@ -12,20 +12,19 @@ def main():
     #converting dictionary into a list of dictionaries by char
     book_char_list = char_list(book_char_dict)
 
-    ##print (book_text)
+
     #printing the report
     print(f"--- Begin report of {book_to_read} ---")
     print(f"{book_word_count} words found in the document")
-    ##print(f"character count: {book_char_dict}")
 
-    #printing the char list sorted
-
+    #sorting the char list and then printing the char list
     book_char_list.sort(reverse=True, key=sort_on)
 
     for char in book_char_list:
         print(f"The '{char['char']}' character was found {char['count']} times")
 
-#sorting the list of dictionaries and printing sorted char list
+# functions needed
+
     
 def char_list(list):
     charlist = []
@@ -59,12 +58,18 @@ def count_characters(text):
 
 main()
 
+# do not delete below, old code tested and want to keep as reference
 
+    ##print (book_text)
+    ##print(f"character count: {book_char_dict}")
 
     #lowered_characters = text.lower()
     #character_split = lowered_characters.split()
     #return len(lowered_characters)
-#    
+
+
+#    originally tried including without separate functions
+
 #def main():
 #    book_to_read = "books/frankenstein.txt"
 #    with open(book_to_read) as f:

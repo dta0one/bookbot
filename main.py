@@ -27,19 +27,15 @@ def count_characters(text):
         else:
             characters_count[char] = 1
     return characters_count
-    
-
-
-    #lowered_characters = text.lower()
-    #character_split = lowered_characters.split()
-    #return len(lowered_characters)
-
 
 main()
 
 
 
-
+    #lowered_characters = text.lower()
+    #character_split = lowered_characters.split()
+    #return len(lowered_characters)
+#    
 #def main():
 #    book_to_read = "books/frankenstein.txt"
 #    with open(book_to_read) as f:

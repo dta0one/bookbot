@@ -1,23 +1,23 @@
 def main():
-    #path to book and adding the book to text
+    # path to book and adding the book to text
     book_to_read = "books/frankenstein.txt"
     book_text = get_book_text(book_to_read)
     
-    #getting the word count
+    # getting the word count
     book_word_count = get_word_count(book_text)
     
-    #functions to generate the character dictionary
+    # functions to generate the character dictionary
     book_char_dict = count_characters(book_text)
     
-    #converting dictionary into a list of dictionaries by char
+    # converting dictionary into a list of dictionaries by char
     book_char_list = char_list(book_char_dict)
 
 
-    #printing the report
+    # printing the report
     print(f"--- Begin report of {book_to_read} ---")
     print(f"{book_word_count} words found in the document")
 
-    #sorting the char list and then printing the char list
+    # sorting the char list and then printing the char list
     book_char_list.sort(reverse=True, key=sort_on)
 
     for char in book_char_list:
@@ -25,7 +25,7 @@ def main():
 
 # functions needed
 
-    
+# also removes non alphanumeric chars 
 def char_list(list):
     charlist = []
     for char, count in list.items():

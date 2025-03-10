@@ -1,83 +1,41 @@
-from stats import get_word_count
+import sys
+from stats import (
+    get_num_words,
+    chars_dict_to_sorted_list,
+    get_chars_dict,
+)
+
 
 def main():
-    # path to book and adding the book to text
-    book_to_read = "books/frankenstein.txt"
-    book_text = get_book_text(book_to_read)
-    
-    # getting the word count
-    book_word_count = get_word_count(book_text)
-    
-    # functions to generate the character dictionary
-    book_char_dict = count_characters(book_text)
-    
-    # converting dictionary into a list of dictionaries by char
-    book_char_list = char_list(book_char_dict)
+    if len(sys.argv) < 2:
+        print("Usage: python main.py <path_to_book>")
+        sys.exit(1)
+    book_path = sys.argv[1]
+
+    text = get_book_text(book_path)
+    num_words = get_num_words(text)
+    chars_dict = get_chars_dict(text)
+    chars_sorted_list = chars_dict_to_sorted_list(chars_dict)
+    print_report(book_path, num_words, chars_sorted_list)
 
 
-    # printing the report
-    print(f"--- Begin report of {book_to_read} ---")
-    print(f"{book_word_count} words found in the document")
-
-    # sorting the char list and then printing the char list
-    book_char_list.sort(reverse=True, key=sort_on)
-
-    for char in book_char_list:
-        print(f"The '{char['char']}' character was found {char['count']} times")
-
-# functions needed
-
-# also removes non alphanumeric chars 
-def char_list(list):
-    charlist = []
-    for char, count in list.items():
-        if char.isalpha():
-            charlist.append({"char": char, "count": count})
-    return charlist
-
-def sort_on(dict):
-    return dict["count"]
-
-def get_book_text(book):
-    with open(book) as f:
+def get_book_text(path):
+    with open(path) as f:
         return f.read()
 
 
+def print_report(book_path, num_words, chars_sorted_list):
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {book_path}...")
+    print("----------- Word Count ----------")
+    print(f"Found {num_words} total words")
+    print("--------- Character Count -------")
+    for item in chars_sorted_list:
+        if not item["char"].isalpha():
+            continue
+        print(f"{item['char']}: {item['num']}")
 
-def count_characters(text):
-    lowered_characters = text.lower()
-    characters_count = {}
-
-    for char in lowered_characters:
-        if char in characters_count:
-            characters_count[char] += 1
-        else:
-            characters_count[char] = 1
-    return characters_count
+    print("============= END ===============")
 
 
 main()
-
-# do not delete below, old code tested and want to keep as reference
-
-    ##print (book_text)
-    ##print(f"character count: {book_char_dict}")
-
-    #lowered_characters = text.lower()
-    #character_split = lowered_characters.split()
-    #return len(lowered_characters)
-
-
-#    originally tried including without separate functions
-
-#def main():
-#    book_to_read = "books/frankenstein.txt"
-#    with open(book_to_read) as f:
-#        book_text = f.read()
-#    print(book_text)
-#
-#    words = book_text.split()
-#    word_count = len(words)
-#    print(word_count)
-#
-#main()
